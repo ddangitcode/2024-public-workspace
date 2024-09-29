@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8">
+<title>근무시간 계산기 | dgcode</title>
+<style>
+  html, body { margin:0; padding:0; }
+  fieldset { margin: 0; padding:16px; border-width: 1px; }
+  fieldset + fieldset { margin-top: 16px;}
+  legend { padding: 0 8px; }
+  label { cursor:pointer; }
+  input:invalid { outline-color:red; }
+  input[type="radio"] { margin:0; }
+
+  .dv-app { margin:0 auto; padding: 2em; max-width:360px; }
+  .dv-app h1 { margin-bottom: 2em; font-size:1em; }
+
+  .fs-working-days label { margin-left:8px; text-decoration:underline; }
+  .fs-working-days .sp-text { margin-left:2px; }
+
+  .fs-half-days label { margin-left:8px; text-decoration:underline; }
+  .fs-half-days .sp-text { margin-left:2px; }
+
+  .fs-working-hours .dv-fields { text-align:center; }
+  .fs-working-hours .dv-fields + .dv-fields { margin-top:8px }
+  .fs-working-hours input { width:100px; }
+  .fs-working-hours .dv-fields label:first-child { display:none; }
+  .fs-working-hours .dv-fields label:last-child { margin-left: 16px; }
+
+  .fs-buttons { border: 0 none; background-color: #eee; }
+  .fs-buttons legend { background-color: #fff; }
+  .fs-buttons .dv-fields { text-align:right; }
+</style>
+
+<div class="dv-app">
+  <h1>근무시간 계산기</h1>
+  <form class="fm-working-hours-calculator" id="fm_working_hours_calculator">
+    <fieldset class="fs-working-days">
+      <legend>근무일수</legend>
+      <div class="dv-fields">
+        <label>
+          <input type="radio" name="working-days" value="5" required checked /> 
+          <span class="sp-text">5일</span> 
+        </label>
+        <label>
+          <input type="radio" name="working-days" value="4" /> 
+          <span class="sp-text">4일</span> 
+        </label>
+        <label>
+          <input type="radio" name="working-days" value="3" /> 
+          <span class="sp-text">3일</span> 
+        </label>
+        <label>
+          <input type="radio" name="working-days" value="2" /> 
+          <span class="sp-text">2일</span> 
+        </label>
+        <label>
+          <input type="radio" name="working-days" value="1" /> 
+          <span class="sp-text">1일</span> 
+        </label>
+      </div>
+    </fieldset>
+    <fieldset class="fs-half-days">
+      <legend>반차일수</legend>
+      <div class="dv-fields">
+        <label>
+          <input type="radio" name="half-days" value="0" required checked /> 
+          <span class="sp-text">0일</span> 
+        </label>
+        <label>
+          <input type="radio" name="half-days" value="1" /> 
+          <span class="sp-text">1일</span> 
+        </label>
+        <label>
+          <input type="radio" name="half-days" value="2" /> 
+          <span class="sp-text">2일</span> 
+        </label>
+      </div>
+    </fieldset>
+    <fieldset class="fs-working-hours">
+      <legend>업무의 시작과 종료시간</legend>
+      <div class="dv-fields">
+        <label>
+          <span class="sp-text">날짜</span> 
+          <input type="text" name="working-hours.0.date" pattern="\d{4}" autocomplete="off" />
+        </label>
+        <label>
+          <span class="sp-text">시작</span> 
+          <input type="text" name="working-hours.0.start" pattern="\d{4}" autocomplete="off" />
+        </label>
+        <label>
+          <span class="sp-text">종료</span> 
+          <input type="text" name="working-hours.0.end" pattern="\d{4}" autocomplete="off" />
+        </label>
+      </div>
+      <div class="dv-fields">
+        <label>
+          <span class="sp-text">날짜</span> 
+          <input type="text" name="working-hours.1.date" pattern="\d{4}" autocomplete="off" />
+        </label>
+        <label>
+          <span class="sp-text">시작</span> 
+          <input type="text" name="working-hours.1.start" pattern="\d{4}" autocomplete="off" />
+        </label>
+        <label>
+          <span class="sp-text">종료</span> 
+          <input type="text" name="working-hours.1.end" pattern="\d{4}" autocomplete="off" />
+        </label>
+      </div>
+      <div class="dv-fields">
+        <label>
+          <span class="sp-text">날짜</span> 
+          <input type="text" name="working-hours.2.date" pattern="\d{4}" autocomplete="off" />
+        </label>
+        <label>
+          <span class="sp-text">시작</span> 
+          <input type="text" name="working-hours.2.start" pattern="\d{4}" autocomplete="off" />
+        </label>
+        <label>
+          <span class="sp-text">종료</span> 
+          <input type="text" name="working-hours.2.end" pattern="\d{4}" autocomplete="off" />
+        </label>
+      </div>
+      <div class="dv-fields">
+        <label>
+          <span class="sp-text">날짜</span> 
+          <input type="text" name="working-hours.3.date" pattern="\d{4}" autocomplete="off" />
+        </label>
+        <label>
+          <span class="sp-text">시작</span> 
+          <input type="text" name="working-hours.3.start" pattern="\d{4}" autocomplete="off" />
+        </label>
+        <label>
+          <span class="sp-text">종료</span> 
+          <input type="text" name="working-hours.3.end" pattern="\d{4}" autocomplete="off" />
+        </label>
+      </div>
+      <div class="dv-fields">
+        <label>
+          <span class="sp-text">날짜</span> 
+          <input type="text" name="working-hours.4.date" pattern="\d{4}" autocomplete="off" />
+        </label>
+        <label>
+          <span class="sp-text">시작</span> 
+          <input type="text" name="working-hours.4.start" pattern="\d{4}" autocomplete="off" />
+        </label>
+        <label>
+          <span class="sp-text">종료</span> 
+          <input type="text" name="working-hours.4.end" pattern="\d{4}" autocomplete="off" />
+        </label>
+      </div>
+      <div class="dv-fields">
+        <label>
+          <span class="sp-text">날짜</span> 
+          <input type="text" name="working-hours.5.date" pattern="\d{4}" autocomplete="off" />
+        </label>
+        <label>
+          <span class="sp-text">시작</span> 
+          <input type="text" name="working-hours.5.start" pattern="\d{4}" autocomplete="off" />
+        </label>
+        <label>
+          <span class="sp-text">종료</span> 
+          <input type="text" name="working-hours.5.end" pattern="\d{4}" autocomplete="off" />
+        </label>
+      </div>
+      <div class="dv-fields">
+        <label>
+          <span class="sp-text">날짜</span> 
+          <input type="text" name="working-hours.6.date" pattern="\d{4}" autocomplete="off" />
+        </label>
+        <label>
+          <span class="sp-text">시작</span> 
+          <input type="text" name="working-hours.6.start" pattern="\d{4}" autocomplete="off" />
+        </label>
+        <label>
+          <span class="sp-text">종료</span> 
+          <input type="text" name="working-hours.6.end" pattern="\d{4}" autocomplete="off" />
+        </label>
+      </div>
+      <div class="dv-fields">
+        <label>
+          <span class="sp-text">날짜</span> 
+          <input type="text" name="working-hours.7.date" pattern="\d{4}" autocomplete="off" />
+        </label>
+        <label>
+          <span class="sp-text">시작</span> 
+          <input type="text" name="working-hours.7.start" pattern="\d{4}" autocomplete="off" />
+        </label>
+        <label>
+          <span class="sp-text">종료</span> 
+          <input type="text" name="working-hours.7.end" pattern="\d{4}" autocomplete="off" />
+        </label>
+      </div>
+      <div class="dv-fields">
+        <label>
+          <span class="sp-text">날짜</span> 
+          <input type="text" name="working-hours.8.date" pattern="\d{4}" autocomplete="off" />
+        </label>
+        <label>
+          <span class="sp-text">시작</span> 
+          <input type="text" name="working-hours.8.start" pattern="\d{4}" autocomplete="off" />
+        </label>
+        <label>
+          <span class="sp-text">종료</span> 
+          <input type="text" name="working-hours.8.end" pattern="\d{4}" autocomplete="off" />
+        </label>
+      </div>
+      <div class="dv-fields">
+        <label>
+          <span class="sp-text">날짜</span> 
+          <input type="text" name="working-hours.9.date" pattern="\d{4}" autocomplete="off" />
+        </label>
+        <label>
+          <span class="sp-text">시작</span> 
+          <input type="text" name="working-hours.9.start" pattern="\d{4}" autocomplete="off" />
+        </label>
+        <label>
+          <span class="sp-text">종료</span> 
+          <input type="text" name="working-hours.9.end" pattern="\d{4}" autocomplete="off" />
+        </label>
+      </div>
+    </fieldset>
+    <fieldset class="fs-buttons">
+      <legend>폼 액션</legend>
+      <div class="dv-fields">
+        <button type="reset">reset</button>
+        <button type="submit">submit</button>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>계산된 남거나 모자른 시간 표시</legend>
+      <div class="fields">
+        <output class="output-working-hours-calculated-time-result" id="output_working_hours_calculated_time_result"></output>
+      </div>
+    </fieldset>
+  </form>
+</div>
+<script>
+  window.addEventListener('DOMContentLoaded', function() {});
+  
+  window.addEventListener('load', function() {
+    const form = document.getElementById('fm_working_hours_calculator');
+
+    form.oninput = function(e) {
+      console.log(e.target.name, e.target.value);
+      handleFormSubmit(form);
+    };
+
+    form.onsubmit = function(e) {
+      e.preventDefault(); 
+      handleFormSubmit(e.target);
+    };
+  });
+
+  function handleFormSubmit(fm) {
+    const fmData = new FormData(fm); 
+    const fmDataEntries = Object.fromEntries(fmData);
+    
+    // console.log(1, fmDataEntries); 
+
+    const workingDaysNumber = parseInt(fm.elements['working-days'].value) * 9; 
+    const halfDaysNumber = parseInt(fm.elements['half-days'].value) * 5; 
+
+    // 함수 호출
+    const result = calculateElapsedTimeToString(
+      parseWorkingHours(fmDataEntries), 
+      workingDaysNumber - halfDaysNumber,
+    );
+
+    document.getElementById('output_working_hours_calculated_time_result').value = `${result}분`;
+  }
+
+  function parseWorkingHours(data) {
+    const workingHours = [];
+    for (let i = 0; i < 10; i++) {
+      const start = data[`working-hours.${i}.start`];
+      const end = data[`working-hours.${i}.end`];
+      if (start && end) {
+        workingHours.push([parseInt(start), parseInt(end)]);
+      }
+    }
+    return workingHours;
+  }
+
+  function calculateElapsedTimeToString(
+    timePairs,
+    targetWorkHours
+  ) {
+    let totalElapsedMinute = 0;
+  
+    for (let [start, end] of timePairs) {
+      const startHour = Math.floor(start / 100);
+      const startMinute = Math.floor(start % 100);
+      const endHour = Math.floor(end / 100);
+      const endMinute = Math.floor(end % 100);
+      const resultHour = endHour - startHour;
+      const resultMinute = endMinute - startMinute;
+      const elapsedMinute = (resultHour * 60) + resultMinute;
+  
+      totalElapsedMinute += elapsedMinute;
+  
+      // console.log(`${resultHour}시간 ${resultMinute}분`);
+    }
+  
+    const remainingTime = totalElapsedMinute - (targetWorkHours * 60);
+  
+    /* console.log({ 
+      targetWorkHours: targetWorkHours * 60,
+      totalElapsedMinute, 
+      remainingTime
+    }); */
+  
+    return remainingTime;
+  }
+  
+</script>
